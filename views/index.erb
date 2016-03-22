@@ -1,7 +1,9 @@
 <h2>Последние посты</h2>
 
-<% @results.each do |post|
-	<p>
+<% @results.each do |post| %>
+ <p>
 	  <%= post['content']  %>
+	  <br />
+	  Добавлен <%= post['created_date'] %> 
 	</p>
 <% end %>	
