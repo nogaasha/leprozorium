@@ -48,7 +48,13 @@ end
 #вывод информации о посте
 get '/details/:post_id' do 
 	post_id = params[:post_id]
-	erb "id #{post_id}"
+
+	#Выбираем список постов с определенным id
+results = @db.execute 'select * from Posts where id = ?', [post_id]
+@row = results[0]
+
+#	erb "Displaying information for post with id #{post_id}"
+ erb :details
   
 end	
 
