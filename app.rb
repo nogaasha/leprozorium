@@ -22,6 +22,15 @@ configure do               #создаем таблицы в БД
 			created_date DATE,
 			content TEXT
 		)'
+
+	@db.execute 'CREATE TABLE IF NOT EXISTS
+		Comments
+		(
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			created_date DATE,
+			content TEXT,
+			post_id INTEGER
+		)'
 end	
 
 get '/' do
@@ -60,3 +69,8 @@ results = @db.execute 'select * from Posts where id = ?', [post_id]
   
 end	
 
+post '/details/:post_id' do 
+	post_id = params[:post_id]
+	 content = params[:content]  
+	 erb "You type"
+end	 
