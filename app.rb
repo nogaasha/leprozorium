@@ -13,7 +13,7 @@ before do
    init_db
 end
 
-configure do
+configure do               #создаем таблицы в БД
 	init_db
 	@db.execute 'CREATE TABLE IF NOT EXISTS
 		Posts
@@ -37,7 +37,7 @@ get '/new' do
 end
 
 post '/new' do
-  content = params[:content]
+  content = params[:content]    # :content - это атрибут name = "content" for textarea
   if content.length <= 0
   	 @error= 'Введите текст'
   	 return erb :new
@@ -45,4 +45,10 @@ post '/new' do
   @db.execute 'insert into Posts (content, created_date) values (?, datetime())',[content]	 
   redirect to '/'
 end
+#вывод информации о посте
+get '/details/:post_id' do 
+	post_id = params[:post_id]
+	erb "id #{post_id}"
+  
+end	
 
